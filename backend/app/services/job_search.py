@@ -24,7 +24,7 @@ class JobSearchService:
                 location=user.location_preference,
                 source="dummy",
                 url=f"https://example.com/job/{i+1}",
-                created_at=datetime.utcnow()
+                posted_date=datetime.utcnow()
             )
             self.db.add(job)
             jobs.append(job)
