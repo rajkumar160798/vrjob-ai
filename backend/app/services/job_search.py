@@ -1,6 +1,6 @@
 from typing import List, Dict
 from sqlalchemy.orm import Session
-from ..models import User, Job, ResumeVersion, JobApplication
+from ..users.models import User, Job, ResumeVersion, JobApplication
 from ..resume_agent import ResumeAgent
 from datetime import datetime
 import random
@@ -21,10 +21,10 @@ class JobSearchService:
                 title=random.choice(user.desired_roles),
                 company=f"Company {i+1}",
                 description=f"Looking for a {random.choice(user.desired_roles)} with experience in {', '.join(random.sample(user.skills, 3))}",
-                location=user.location_preference.value,
+                location=user.location_preference,
                 source="dummy",
                 url=f"https://example.com/job/{i+1}",
-                posted_date=datetime.utcnow()
+                created_at=datetime.utcnow()
             )
             self.db.add(job)
             jobs.append(job)

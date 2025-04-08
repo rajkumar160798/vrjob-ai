@@ -2,7 +2,7 @@ from typing import List, Dict
 import requests
 from bs4 import BeautifulSoup
 from datetime import datetime, timedelta
-from ..models import Job
+from ..users.models import Job
 from sqlalchemy.orm import Session
 import json
 import os
