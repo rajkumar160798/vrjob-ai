@@ -6,15 +6,14 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Simplified database URL with absolute path
-DATABASE_URL = "sqlite:////Users/rajkumarmyakala/vrjob-ai/vrjob.db"
+# Choose from environment or default to SQLite
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./vrjob.db")
 
-print(f"🔌 Connecting to database at: {DATABASE_URL}")
+print(f"Using DATABASE_URL: {DATABASE_URL}")
 
 engine = create_engine(
     DATABASE_URL,
-    echo=True,  # This will log all SQL operations
-    connect_args={"check_same_thread": False}
+    connect_args={"check_same_thread": False} if DATABASE_URL.startswith("sqlite") else {},
 )
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
